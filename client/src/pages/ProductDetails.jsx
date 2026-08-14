@@ -9,9 +9,11 @@ import {
 } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import products from "../data/products";
+import { useCart } from "../context/CartContext";
 
 function ProductDetails() {
   const { id } = useParams();
+  const { addToCart } = useCart();
 
   const product = products.find(
     (item) => item.id === Number(id)
@@ -185,10 +187,13 @@ function ProductDetails() {
               </div>
 
               {/* Add to Cart */}
-              <button className="flex flex-1 items-center justify-center gap-2 rounded-full bg-orange-600 px-7 py-3.5 font-semibold text-white shadow-lg shadow-orange-600/20 transition hover:bg-orange-700">
-                <ShoppingBag size={19} />
-                Add to Cart
-              </button>
+              <button
+  onClick={() => addToCart(product, quantity)}
+  className="flex flex-1 items-center justify-center gap-2 rounded-full bg-orange-600 px-7 py-3.5 font-semibold text-white shadow-lg shadow-orange-600/20 transition hover:bg-orange-700"
+>
+  <ShoppingBag size={19} />
+  Add to Cart
+</button>
 
               {/* Wishlist */}
               <button
